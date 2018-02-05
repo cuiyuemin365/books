@@ -1,0 +1,265 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/TR/xhtml1/strict">
+<head>
+<title>Installation of mod_jk2 in the Web Server</title>
+<meta content="1999-2002 The Apache Software Foundation" name="copyright"/>
+<meta content="$Date: 2002/09/20 21:35:31 $" name="last-changed"/>
+<meta content="Jean-Frederic Clere" name="author"/>
+<meta content="jfrederic.clere@fujitsu-siemens.com" name="email"/>
+<link href="..//style.css" type="text/css" rel="stylesheet"/>
+<link href="../images/tomcat.ico" rel="shortcut icon"/>
+</head>
+<body link="#525D76" vlink="#525D76" alink="#525D76" text="#000000" bgcolor="#ffffff">
+<a name="TOP"/>
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr height="1">
+<td class="nil" height="1" bgcolor="#ffffff" width="150">
+<img hspace="0" vspace="0" height="1" width="150" border="0" src="../images/pixel.gif"/>
+</td>
+<td class="nil" height="1" bgcolor="#ffffff" width="*">
+<img hspace="0" vspace="0" height="1" width="370" border="0" src="../images/pixel.gif"/>
+</td>
+</tr>
+<tr>
+<td width="*" colspan="2" class="logo" bgcolor="#ffffff">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="left">
+<img align="left" height="75" width="270" border="0" src="../images/jakarta.gif"/>
+</td>
+<td align="right">
+<img align="right" border="0" src="../images/mod_jk.jpeg"/>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td colspan="2" width="*" align="right" class="head" bgcolor="#999999">
+<nobr>
+<a href="http://www.apache.org/" class="head">Apache Software Foundation</a> |
+                <a href="http://jakarta.apache.org/" class="head">Jakarta Project</a> |
+                <a href="http://jakarta.apache.org/tomcat/" class="head">Apache Tomcat</a>
+</nobr>
+</td>
+</tr>
+<tr>
+<td valign="top" width="150" bgcolor="#ffffff">
+<table class="menu" cellpadding="0" cellspacing="0" width="150" border="0">
+<tr height="1">
+<td class="nil" height="1" bgcolor="#cccccc" width="10">
+<img hspace="0" vspace="0" height="1" width="10" border="0" src="../images/pixel.gif"/>
+</td>
+<td class="nil" height="1" bgcolor="#cccccc" width="140">
+<img hspace="0" vspace="0" height="1" width="140" border="0" src="../images/pixel.gif"/>
+</td>
+</tr>
+<tr height="6">
+<td colspan="2" width="150" bgcolor="#d0d0d0">Presentation</td>
+</tr>
+<tr>
+<td colspan="2" width="150" bgcolor="#cccccc">
+<nobr>
+<a class="menu" href="../index.html">Overview</a>
+</nobr>
+</td>
+</tr>
+<tr height="2"/>
+<tr height="6"/>
+<tr height="6">
+<td colspan="2" width="150" bgcolor="#d0d0d0">Commons</td>
+</tr>
+<tr>
+<td colspan="2" width="150" bgcolor="#cccccc">
+<nobr>
+<a class="menu" href="../common/AJPv13.html">AJPv13</a>
+</nobr>
+</td>
+</tr>
+<tr height="2"/>
+<tr>
+<td colspan="2" width="150" bgcolor="#cccccc">
+<nobr>
+<a class="menu" href="../common/AJPv14-proposal.html">AJPv14 Proposal</a>
+</nobr>
+</td>
+</tr>
+<tr height="2"/>
+<tr>
+<td colspan="2" width="150" bgcolor="#cccccc">
+<nobr>
+<a class="menu" href="../faq.html">FAQ</a>
+</nobr>
+</td>
+</tr>
+<tr height="2"/>
+<tr height="6"/>
+<tr height="6">
+<td colspan="2" width="150" bgcolor="#d0d0d0">JK</td>
+</tr>
+<tr>
+<td colspan="2" width="150" bgcolor="#cccccc">
+<nobr>
+<a class="menu" href="../jk/aphowto.html">Apache HowTo</a>
+</nobr>
+</td>
+</tr>
+<tr height="2"/>
+<tr>
+<td colspan="2" width="150" bgcolor="#cccccc">
+<nobr>
+<a class="menu" href="../jk/domhowto.html">Domino HowTo</a>
+</nobr>
+</td>
+</tr>
+<tr height="2"/>
+<tr>
+<td colspan="2" width="150" bgcolor="#cccccc">
+<nobr>
+<a class="menu" href="../jk/iishowto.html">IIS HowTo</a>
+</nobr>
+</td>
+</tr>
+<tr height="2"/>
+<tr>
+<td colspan="2" width="150" bgcolor="#cccccc">
+<nobr>
+<a class="menu" href="../jk/neshowto.html">Netscape/iPlanet HowTo</a>
+</nobr>
+</td>
+</tr>
+<tr height="2"/>
+<tr>
+<td colspan="2" width="150" bgcolor="#cccccc">
+<nobr>
+<a class="menu" href="../jk/workershowto.html">Workers HowTo</a>
+</nobr>
+</td>
+</tr>
+<tr height="2"/>
+<tr height="6"/>
+<tr height="6">
+<td colspan="2" width="150" bgcolor="#d0d0d0">JK2</td>
+</tr>
+<tr>
+<td colspan="2" width="150" bgcolor="#cccccc">
+<nobr>
+<a class="menu" href="../jk2/configtc.html">Configuration in the Tomcat</a>
+</nobr>
+</td>
+</tr>
+<tr height="2"/>
+<tr>
+<td colspan="2" width="150" bgcolor="#cccccc">
+<nobr>
+<a class="menu" href="../jk2/configweb.html">Configuration in the Web Server</a>
+</nobr>
+</td>
+</tr>
+<tr height="2"/>
+<tr height="6"/>
+<tr height="6">
+<td colspan="2" width="150" bgcolor="#d0d0d0">
+                Developpers
+                </td>
+</tr>
+<tr>
+<td colspan="2" width="150" bgcolor="#cccccc">
+<nobr>
+<a href="./api-java/index.html" class="menu">Java API Documentation</a>
+</nobr>
+</td>
+</tr>
+<tr>
+<td colspan="2" width="150" bgcolor="#cccccc">
+<nobr>
+<a href="./api-c/" class="menu">C API Documentation</a>
+</nobr>
+</td>
+</tr>
+</table>
+</td>
+<td class="body" valign="top" width="*" bgcolor="#ffffff">
+<a name="Installation">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top" class="section" bgcolor="#525D76">
+<img border="0" vspace="0" hspace="0" align="left" valign="top" src="../images/corner.gif"/>Installation</td>
+</tr>
+</table>
+</a>
+<p class="section">
+      The actual build mechanism creates the dso files in the
+      build/jk2/${servername} subdirectory of the jakarta-tomcat-connectors/jk.
+      When configure --with-jni is used 2 dso files are created.
+      These files have to be copied in the right location of the web server
+      installation.
+    </p>
+<a name="sub_Apache 1">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top" class="subsection" bgcolor="#828DA6">
+<img border="0" vspace="0" hspace="0" align="left" valign="top" src="../images/corner.gif"/>Apache 1</td>
+</tr>
+</table>
+</a>
+<br/>
+<a name="sub_Apache 2">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top" class="subsection" bgcolor="#828DA6">
+<img border="0" vspace="0" hspace="0" align="left" valign="top" src="../images/corner.gif"/>Apache 2</td>
+</tr>
+</table>
+</a>
+<p class="section">
+        In the following example Apache-2.0 is installed in
+        /home/apache20/apache40 and the commands are excuted in
+        the jakarta-tomcat-connectors directory.
+      </p>
+<p class="screen">
+<div align="center">
+<table bgcolor="#cccccc" cellpadding="2" cellspacing="0" border="1" width="80%">
+<tr>
+<td align="left" bgcolor="#cccccc">
+<div class="screen">Copy the dso files in the modules location:</div>
+<code>
+<nobr>
+<em class="screen">[user@host] ~ $ </em>
+<b class="screen">cp jk/build/jk2/apache2/mod_jk2.so /home/apache20/apache40/modules</b>
+</nobr>
+</code>
+<br/>
+<code>
+<nobr>
+<em class="screen">[user@host] ~ $ </em>
+<b class="screen">cp jk/build/jk2/apache2/jkjni.so /home/apache20/apache40/modules</b>
+</nobr>
+</code>
+<br/>
+<div class="screen">Add mod_jk2 loading in the httpd.conf:</div>
+<code class="screen">
+<nobr>LoadModule jk2_module modules/mod_jk2.so</nobr>
+</code>
+<br/>
+</td>
+</tr>
+</table>
+</div>
+</p>
+<br/>
+<a name="sub_IIS">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top" class="subsection" bgcolor="#828DA6">
+<img border="0" vspace="0" hspace="0" align="left" valign="top" src="../images/corner.gif"/>IIS</td>
+</tr>
+</table>
+</a>
+<br/>
+<br/>
+</td>
+</tr>
+</table>
+</body>
+</html>

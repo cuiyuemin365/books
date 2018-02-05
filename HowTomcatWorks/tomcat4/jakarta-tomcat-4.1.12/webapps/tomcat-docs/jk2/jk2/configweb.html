@@ -1,0 +1,920 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html xmlns="http://www.w3.org/TR/xhtml1/strict">
+<head>
+<title>Configuration in the Web Server</title>
+<meta content="1999-2002 The Apache Software Foundation" name="copyright"/>
+<meta content="$Date: 2002/09/20 21:35:31 $" name="last-changed"/>
+<meta content="Costin Manolache" name="author"/>
+<meta content="cmanolache@yahoo.com" name="email"/>
+<meta content="Jean-Frederic Clere" name="author"/>
+<meta content="jfrederic.clere@fujitsu-siemens.com" name="email"/>
+<link href="..//style.css" type="text/css" rel="stylesheet"/>
+<link href="../images/tomcat.ico" rel="shortcut icon"/>
+</head>
+<body link="#525D76" vlink="#525D76" alink="#525D76" text="#000000" bgcolor="#ffffff">
+<a name="TOP"/>
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr height="1">
+<td class="nil" height="1" bgcolor="#ffffff" width="150">
+<img hspace="0" vspace="0" height="1" width="150" border="0" src="../images/pixel.gif"/>
+</td>
+<td class="nil" height="1" bgcolor="#ffffff" width="*">
+<img hspace="0" vspace="0" height="1" width="370" border="0" src="../images/pixel.gif"/>
+</td>
+</tr>
+<tr>
+<td width="*" colspan="2" class="logo" bgcolor="#ffffff">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="left">
+<img align="left" height="75" width="270" border="0" src="../images/jakarta.gif"/>
+</td>
+<td align="right">
+<img align="right" border="0" src="../images/mod_jk.jpeg"/>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+<tr>
+<td colspan="2" width="*" align="right" class="head" bgcolor="#999999">
+<nobr>
+<a href="http://www.apache.org/" class="head">Apache Software Foundation</a> |
+                <a href="http://jakarta.apache.org/" class="head">Jakarta Project</a> |
+                <a href="http://jakarta.apache.org/tomcat/" class="head">Apache Tomcat</a>
+</nobr>
+</td>
+</tr>
+<tr>
+<td valign="top" width="150" bgcolor="#ffffff">
+<table class="menu" cellpadding="0" cellspacing="0" width="150" border="0">
+<tr height="1">
+<td class="nil" height="1" bgcolor="#cccccc" width="10">
+<img hspace="0" vspace="0" height="1" width="10" border="0" src="../images/pixel.gif"/>
+</td>
+<td class="nil" height="1" bgcolor="#cccccc" width="140">
+<img hspace="0" vspace="0" height="1" width="140" border="0" src="../images/pixel.gif"/>
+</td>
+</tr>
+<tr height="6">
+<td colspan="2" width="150" bgcolor="#d0d0d0">Presentation</td>
+</tr>
+<tr>
+<td colspan="2" width="150" bgcolor="#cccccc">
+<nobr>
+<a class="menu" href="../index.html">Overview</a>
+</nobr>
+</td>
+</tr>
+<tr height="2"/>
+<tr height="6"/>
+<tr height="6">
+<td colspan="2" width="150" bgcolor="#d0d0d0">Commons</td>
+</tr>
+<tr>
+<td colspan="2" width="150" bgcolor="#cccccc">
+<nobr>
+<a class="menu" href="../common/AJPv13.html">AJPv13</a>
+</nobr>
+</td>
+</tr>
+<tr height="2"/>
+<tr>
+<td colspan="2" width="150" bgcolor="#cccccc">
+<nobr>
+<a class="menu" href="../common/AJPv14-proposal.html">AJPv14 Proposal</a>
+</nobr>
+</td>
+</tr>
+<tr height="2"/>
+<tr>
+<td colspan="2" width="150" bgcolor="#cccccc">
+<nobr>
+<a class="menu" href="../faq.html">FAQ</a>
+</nobr>
+</td>
+</tr>
+<tr height="2"/>
+<tr height="6"/>
+<tr height="6">
+<td colspan="2" width="150" bgcolor="#d0d0d0">JK</td>
+</tr>
+<tr>
+<td colspan="2" width="150" bgcolor="#cccccc">
+<nobr>
+<a class="menu" href="../jk/aphowto.html">Apache HowTo</a>
+</nobr>
+</td>
+</tr>
+<tr height="2"/>
+<tr>
+<td colspan="2" width="150" bgcolor="#cccccc">
+<nobr>
+<a class="menu" href="../jk/domhowto.html">Domino HowTo</a>
+</nobr>
+</td>
+</tr>
+<tr height="2"/>
+<tr>
+<td colspan="2" width="150" bgcolor="#cccccc">
+<nobr>
+<a class="menu" href="../jk/iishowto.html">IIS HowTo</a>
+</nobr>
+</td>
+</tr>
+<tr height="2"/>
+<tr>
+<td colspan="2" width="150" bgcolor="#cccccc">
+<nobr>
+<a class="menu" href="../jk/neshowto.html">Netscape/iPlanet HowTo</a>
+</nobr>
+</td>
+</tr>
+<tr height="2"/>
+<tr>
+<td colspan="2" width="150" bgcolor="#cccccc">
+<nobr>
+<a class="menu" href="../jk/workershowto.html">Workers HowTo</a>
+</nobr>
+</td>
+</tr>
+<tr height="2"/>
+<tr height="6"/>
+<tr height="6">
+<td colspan="2" width="150" bgcolor="#d0d0d0">JK2</td>
+</tr>
+<tr>
+<td colspan="2" width="150" bgcolor="#cccccc">
+<nobr>
+<a class="menu" href="../jk2/configtc.html">Configuration in the Tomcat</a>
+</nobr>
+</td>
+</tr>
+<tr height="2"/>
+<tr>
+<td colspan="2" width="150" bgcolor="#cccccc">
+<nobr>
+<a class="menu" href="../jk2/configweb.html">Configuration in the Web Server</a>
+</nobr>
+</td>
+</tr>
+<tr height="2"/>
+<tr>
+<td width="10" bgcolor="#cccccc"/>
+<td width="140" bgcolor="#cccccc">
+<a href="#Intro" class="menu">Intro</a>
+</td>
+</tr>
+<tr height="1"/>
+<tr>
+<td width="10" bgcolor="#cccccc"/>
+<td width="140" bgcolor="#cccccc">
+<a href="#Config file" class="menu">Config file</a>
+</td>
+</tr>
+<tr height="1"/>
+<tr>
+<td width="10" bgcolor="#cccccc"/>
+<td width="140" bgcolor="#cccccc">
+<a href="#Components" class="menu">Components</a>
+</td>
+</tr>
+<tr height="1"/>
+<tr>
+<td width="10" bgcolor="#cccccc"/>
+<td width="140" bgcolor="#cccccc">
+<a href="#Examples" class="menu">Examples</a>
+</td>
+</tr>
+<tr height="1"/>
+<tr height="6"/>
+<tr height="6">
+<td colspan="2" width="150" bgcolor="#d0d0d0">
+                Developpers
+                </td>
+</tr>
+<tr>
+<td colspan="2" width="150" bgcolor="#cccccc">
+<nobr>
+<a href="./api-java/index.html" class="menu">Java API Documentation</a>
+</nobr>
+</td>
+</tr>
+<tr>
+<td colspan="2" width="150" bgcolor="#cccccc">
+<nobr>
+<a href="./api-c/" class="menu">C API Documentation</a>
+</nobr>
+</td>
+</tr>
+</table>
+</td>
+<td class="body" valign="top" width="*" bgcolor="#ffffff">
+<a name="Intro">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top" class="section" bgcolor="#525D76">
+<img border="0" vspace="0" hspace="0" align="left" valign="top" src="../images/corner.gif"/>Intro</td>
+</tr>
+</table>
+</a>
+<p class="section">Jk2 uses a config file ( workers2.properties ) in the style of a .properties or ini
+ file. It can be configured to use any other backend that provides similar
+ capabilities.
+  </p>
+<p class="section">
+  This document describes the format of this configuration file. Its default name is ${serverRoot}/conf/workers2.properties,
+  where ${serverRoot} is something like /opt/apache.
+</p>
+<br/>
+<a name="Config file">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top" class="section" bgcolor="#525D76">
+<img border="0" vspace="0" hspace="0" align="left" valign="top" src="../images/corner.gif"/>Config file</td>
+</tr>
+</table>
+</a>
+<p class="section"> The default config file is user editable, but mod_jk will persist the 
+changes requested by protocol( not implemented). If you manually change the file while jk2 is 
+working, your changes will be lost. 
+  </p>
+<p class="section">The default configuration format . .  Each setting consists of an object 
+name and a property, with the associated value. The property name is a simple
+ string, with no '.' in it. The name can be anything, but it must have a
+known  'type' as prefix.  
+  </p>
+<p class="section">2 formats are supported:   
+            <pre class="section">
+                TYPE:NAME.PROPERTY=VALUE 
+            </pre>
+        </p>
+<p class="section">and
+            <pre class="section">
+                [TYPE:NAME]
+                PROPERTY=VALUE
+            </pre>
+        </p>
+<br/>
+<a name="Components">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top" class="section" bgcolor="#525D76">
+<img border="0" vspace="0" hspace="0" align="left" valign="top" src="../images/corner.gif"/>Components</td>
+</tr>
+</table>
+</a>
+<p class="section">Each component instance has a name, that is used for configuration and at runtime. Each component has a number of configurable properties. The following rules are used:
+<ul>
+<li>The name is composed from the type and a local part, separated with a ':' ( example: channel.unixsocket:/tmp/jk.socket ) </li>
+<li>The 'type' consist of '.' and ascii characters.  It is mapped to a JMX 'domain'.  </li>
+<li>The local part consists of ascii characters and .:/; 
+</li>
+<li>The property is a simple name, with no dots. </li>
+<li>A simple form of substitution is used in values, where $(property) will be replaced with a previously defined setting. If the property has ':' in it, it'll take the value from the object, if not it'll take the value from a global map.</li>
+</ul>
+</p>
+<a name="sub_Common properties">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top" class="subsection" bgcolor="#828DA6">
+<img border="0" vspace="0" hspace="0" align="left" valign="top" src="../images/corner.gif"/>Common properties</td>
+</tr>
+</table>
+</a>
+<p class="section">Common properties for all components</p>
+<p class="section">
+                <table border="0">
+<tr>
+<td align="middle" valign="top" bgcolor="#039acc">Property name</td>
+<td align="middle" valign="top" bgcolor="#039acc">Default</td>
+<td align="middle" valign="top" bgcolor="#039acc">Description</td>
+</tr>
+<tr>
+<td align="left" valign="top" bgcolor="#a0ddf0">disabled</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">0 (false)</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">"disabled" state for the component, 1=true 0=false</td>
+</tr>
+<tr>
+<td align="left" valign="top" bgcolor="#a0ddf0">debug</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">0 (false)</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">"debug" state for the component, 1=true 0=false</td>
+</tr>
+</table>
+            </p>
+<br/>
+<a name="sub_workerEnv">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top" class="subsection" bgcolor="#828DA6">
+<img border="0" vspace="0" hspace="0" align="left" valign="top" src="../images/corner.gif"/>workerEnv</td>
+</tr>
+</table>
+</a>
+<p class="section">This component represent the core jk2, it has the default logger for all other components. Is the central controller, it controls global properties
+and  provides access to all other objects</p>
+<p class="section">
+                <table border="0">
+<tr>
+<td align="middle" valign="top" bgcolor="#039acc">Property name</td>
+<td align="middle" valign="top" bgcolor="#039acc">Default</td>
+<td align="middle" valign="top" bgcolor="#039acc">Description</td>
+</tr>
+<tr>
+<td align="left" valign="top" bgcolor="#a0ddf0">logger</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">logger</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">Default loger used by jk2 components, can be changed in the config file, normally it defaults to "logger" the Alias for the default logger for the Server/platform.</td>
+</tr>
+<tr>
+<td align="left" valign="top" bgcolor="#a0ddf0">timing</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">0</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">Will jk2 get request timing (needs APR?)</td>
+</tr>
+</table>
+            </p>
+<br/>
+<a name="sub_config">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top" class="subsection" bgcolor="#828DA6">
+<img border="0" vspace="0" hspace="0" align="left" valign="top" src="../images/corner.gif"/>config</td>
+</tr>
+</table>
+</a>
+<p class="section">The config component, hold the detail of the conifg system, such config file name, create global defines</p>
+<p class="section">
+                <table border="0">
+<tr>
+<td align="middle" valign="top" bgcolor="#039acc">Property name</td>
+<td align="middle" valign="top" bgcolor="#039acc">Default</td>
+<td align="middle" valign="top" bgcolor="#039acc">Description</td>
+</tr>
+<tr>
+<td align="left" valign="top" bgcolor="#a0ddf0">debugEnv</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">0</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">Set the debug level of the hidden env component </td>
+</tr>
+</table>
+            </p>
+<br/>
+<a name="sub_uriMap">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top" class="subsection" bgcolor="#828DA6">
+<img border="0" vspace="0" hspace="0" align="left" valign="top" src="../images/corner.gif"/>uriMap</td>
+</tr>
+</table>
+</a>
+<br/>
+<a name="sub_shm">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top" class="subsection" bgcolor="#828DA6">
+<img border="0" vspace="0" hspace="0" align="left" valign="top" src="../images/corner.gif"/>shm</td>
+</tr>
+</table>
+</a>
+<p class="section">Shared memory descriptor</p>
+<p class="section">
+                <table border="0">
+<tr>
+<td align="middle" valign="top" bgcolor="#039acc">Property name</td>
+<td align="middle" valign="top" bgcolor="#039acc">Default</td>
+<td align="middle" valign="top" bgcolor="#039acc">Description</td>
+</tr>
+<tr>
+<td align="left" valign="top" bgcolor="#a0ddf0">file</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">No default value</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">Name of the file that will be mmapped to use as shared memory.</td>
+</tr>
+<tr>
+<td align="left" valign="top" bgcolor="#a0ddf0">size</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">No default value</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">Size of the file.</td>
+</tr>
+</table>
+            </p>
+<br/>
+<a name="sub_uri">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top" class="subsection" bgcolor="#828DA6">
+<img border="0" vspace="0" hspace="0" align="left" valign="top" src="../images/corner.gif"/>uri</td>
+</tr>
+</table>
+</a>
+<p class="section">A uri stores a pattern that is used
+ to match requests to workers, and asociated properties</p>
+<p class="section">
+                <table border="0">
+<tr>
+<td align="middle" valign="top" bgcolor="#039acc">Property name</td>
+<td align="middle" valign="top" bgcolor="#039acc">Default</td>
+<td align="middle" valign="top" bgcolor="#039acc">Description</td>
+</tr>
+<tr>
+<td align="left" valign="top" bgcolor="#a0ddf0">worker</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">lb:0 (The default loadbalancer)</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">Name of the worker that process the request corresponding to the uri</td>
+</tr>
+<tr>
+<td align="left" valign="top" bgcolor="#a0ddf0">context</td>
+<td align="left" valign="top" bgcolor="#a0ddf0"/>
+<td align="left" valign="top" bgcolor="#a0ddf0">the context that will be served by this uri component (webapp style)</td>
+</tr>
+<tr>
+<td align="left" valign="top" bgcolor="#a0ddf0">reverse</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">0</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">If set to 1 all satisfied matches will be rejected.
+This is usefull for the situations when you wish to map the entire application, but still wish that
+paticular context is not served through Tomcat.</td>
+</tr>
+</table>
+            </p>
+<br/>
+<a name="sub_vm">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top" class="subsection" bgcolor="#828DA6">
+<img border="0" vspace="0" hspace="0" align="left" valign="top" src="../images/corner.gif"/>vm</td>
+</tr>
+</table>
+</a>
+<p class="section">Represents the JVM when used as inprocess container
+            </p>
+<p class="section">
+                <table border="0">
+<tr>
+<td align="middle" valign="top" bgcolor="#039acc">Property name</td>
+<td align="middle" valign="top" bgcolor="#039acc">Default</td>
+<td align="middle" valign="top" bgcolor="#039acc">Description</td>
+</tr>
+<tr>
+<td align="left" valign="top" bgcolor="#a0ddf0">JVM</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">(Autoguess)</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">JVM to use for this vm</td>
+</tr>
+<tr>
+<td align="left" valign="top" bgcolor="#a0ddf0">OPT</td>
+<td align="left" valign="top" bgcolor="#a0ddf0"/>
+<td align="left" valign="top" bgcolor="#a0ddf0">Option to pass to this vm, this is a multivalued property</td>
+</tr>
+</table>
+            </p>
+<br/>
+<a name="sub_channels">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top" class="subsection" bgcolor="#828DA6">
+<img border="0" vspace="0" hspace="0" align="left" valign="top" src="../images/corner.gif"/>channels</td>
+</tr>
+</table>
+</a>
+<p class="section">A channel represents a transport protocol, connecting 2
+sides  for RPC communication. The most common and standard is the tcp socket.
+Other  important  channels are unix socket and jni</p>
+<a name="sub_channel.un">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top" class="subsection" bgcolor="#828DA6">
+<img border="0" vspace="0" hspace="0" align="left" valign="top" src="../images/corner.gif"/>channel.un</td>
+</tr>
+</table>
+</a>
+<p class="section">
+    AF_UNIX socket. Only on UNIX like platform. These sockets are faster
+    than "normal" sockets but they are limited to the machine. 
+</p>
+<p class="section">
+                    <table border="0">
+<tr>
+<td align="middle" valign="top" bgcolor="#039acc">Property name</td>
+<td align="middle" valign="top" bgcolor="#039acc">Default</td>
+<td align="middle" valign="top" bgcolor="#039acc">Description</td>
+</tr>
+<tr>
+<td align="left" valign="top" bgcolor="#a0ddf0">file</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">Name of socket</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">Name of the socket file (It is created by the Tomcat ChannelUn)</td>
+</tr>
+</table>
+                </p>
+<br/>
+<a name="sub_channel.socket">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top" class="subsection" bgcolor="#828DA6">
+<img border="0" vspace="0" hspace="0" align="left" valign="top" src="../images/corner.gif"/>channel.socket</td>
+</tr>
+</table>
+</a>
+<p class="section">
+    A communication transport to a remote Engine
+    <b>
+<font color="#333333">Magic:</font>
+</b> The local part of the name will be the Engine name,
+    to use when defining the uri mappings. For example
+    channel.socket.local_9009 will automatically define an engine named
+    local_9009, and if no other setting is set ajp13 will be used for
+    communication.
+    <b>
+<font color="#333333">Magic:</font>
+</b> If no channel is defined in the config, a default channel
+    will be constructed with port=8009, engine=DEFAULT, worker=ajp13 -
+    named 'channel.socket.DEFAULT'
+</p>
+<p class="section">
+                    <table border="0">
+<tr>
+<td align="middle" valign="top" bgcolor="#039acc">Property name</td>
+<td align="middle" valign="top" bgcolor="#039acc">Default</td>
+<td align="middle" valign="top" bgcolor="#039acc">Description</td>
+</tr>
+<tr>
+<td align="left" valign="top" bgcolor="#a0ddf0">port</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">8009</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">Port where Tomcat is listening</td>
+</tr>
+<tr>
+<td align="left" valign="top" bgcolor="#a0ddf0">host</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">localhost</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">Remote host</td>
+</tr>
+<tr>
+<td align="left" valign="top" bgcolor="#a0ddf0">keepalive</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">0</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">? </td>
+</tr>
+<tr>
+<td align="left" valign="top" bgcolor="#a0ddf0">lbfactor</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">1</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">
+    Load balancing factor to use. At this moment, it'll be set on the worker,
+    but in future it should be possible to use lb on a channel level.
+  </td>
+</tr>
+<tr>
+<td align="left" valign="top" bgcolor="#a0ddf0">group</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">lb:0</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">loadbalanced groups to which this channel and the associated worker will be added, multivalued</td>
+</tr>
+<tr>
+<td align="left" valign="top" bgcolor="#a0ddf0">tomcatId</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">?</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">?</td>
+</tr>
+</table>
+                </p>
+<br/>
+<a name="sub_channel.jni">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top" class="subsection" bgcolor="#828DA6">
+<img border="0" vspace="0" hspace="0" align="left" valign="top" src="../images/corner.gif"/>channel.jni</td>
+</tr>
+</table>
+</a>
+<p class="section">The jni channel, used if tomcat is started inprocess</p>
+<br/>
+<br/>
+<a name="sub_workers">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top" class="subsection" bgcolor="#828DA6">
+<img border="0" vspace="0" hspace="0" align="left" valign="top" src="../images/corner.gif"/>workers</td>
+</tr>
+</table>
+</a>
+<p class="section">
+             For the moment 4 worker types are supported: worker.jni,ajp13,status,lb.
+            </p>
+<a name="sub_worker.jni">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top" class="subsection" bgcolor="#828DA6">
+<img border="0" vspace="0" hspace="0" align="left" valign="top" src="../images/corner.gif"/>worker.jni</td>
+</tr>
+</table>
+</a>
+<p class="section">worker used in inprocess, holds the details of the Tomcat class to startup, and paramters to pass</p>
+<p class="section">
+                    <table border="0">
+<tr>
+<td align="middle" valign="top" bgcolor="#039acc">Property name</td>
+<td align="middle" valign="top" bgcolor="#039acc">Default</td>
+<td align="middle" valign="top" bgcolor="#039acc">Description</td>
+</tr>
+<tr>
+<td align="left" valign="top" bgcolor="#a0ddf0">class</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">org/apache/jk/apr/TomcatStarter</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">class that holds the main method called to start tomcat</td>
+</tr>
+<tr>
+<td align="left" valign="top" bgcolor="#a0ddf0">ARG</td>
+<td align="left" valign="top" bgcolor="#a0ddf0"/>
+<td align="left" valign="top" bgcolor="#a0ddf0">Arguments to pass to main method when called</td>
+</tr>
+<tr>
+<td align="left" valign="top" bgcolor="#a0ddf0">stdout</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">NULL</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">file to redirect Standard output from the java process</td>
+</tr>
+<tr>
+<td align="left" valign="top" bgcolor="#a0ddf0">stderr</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">NULL</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">file to redirect Standard output from the java process </td>
+</tr>
+</table>
+                </p>
+<br/>
+<a name="sub_ajp13">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top" class="subsection" bgcolor="#828DA6">
+<img border="0" vspace="0" hspace="0" align="left" valign="top" src="../images/corner.gif"/>ajp13</td>
+</tr>
+</table>
+</a>
+<p class="section">Default worker</p>
+<p class="section">
+                    <table border="0">
+<tr>
+<td align="middle" valign="top" bgcolor="#039acc">Property name</td>
+<td align="middle" valign="top" bgcolor="#039acc">Default</td>
+<td align="middle" valign="top" bgcolor="#039acc">Description</td>
+</tr>
+<tr>
+<td align="left" valign="top" bgcolor="#a0ddf0">secretkey</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">NULL</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">
+                                <b>
+<font color="#333333">Magic:</font>
+</b> The secret key will be set automatically on the associated
+    worker.
+  </td>
+</tr>
+<tr>
+<td align="left" valign="top" bgcolor="#a0ddf0">tomcatId</td>
+<td align="left" valign="top" bgcolor="#a0ddf0"/>
+<td align="left" valign="top" bgcolor="#a0ddf0"/>
+</tr>
+<tr>
+<td align="left" valign="top" bgcolor="#a0ddf0">route</td>
+<td align="left" valign="top" bgcolor="#a0ddf0"/>
+<td align="left" valign="top" bgcolor="#a0ddf0"/>
+</tr>
+<tr>
+<td align="left" valign="top" bgcolor="#a0ddf0">group</td>
+<td align="left" valign="top" bgcolor="#a0ddf0"/>
+<td align="left" valign="top" bgcolor="#a0ddf0"/>
+</tr>
+<tr>
+<td align="left" valign="top" bgcolor="#a0ddf0">level</td>
+<td align="left" valign="top" bgcolor="#a0ddf0"/>
+<td align="left" valign="top" bgcolor="#a0ddf0"/>
+</tr>
+<tr>
+<td align="left" valign="top" bgcolor="#a0ddf0">channel</td>
+<td align="left" valign="top" bgcolor="#a0ddf0"/>
+<td align="left" valign="top" bgcolor="#a0ddf0"/>
+</tr>
+</table>
+                </p>
+<br/>
+<a name="sub_status">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top" class="subsection" bgcolor="#828DA6">
+<img border="0" vspace="0" hspace="0" align="left" valign="top" src="../images/corner.gif"/>status</td>
+</tr>
+</table>
+</a>
+<p class="section">Worker that outputs a page with usefull information to monitor JK2</p>
+<p class="section">To use it add a uri component assigned to this worker</p>
+<br/>
+<a name="sub_lb">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top" class="subsection" bgcolor="#828DA6">
+<img border="0" vspace="0" hspace="0" align="left" valign="top" src="../images/corner.gif"/>lb</td>
+</tr>
+</table>
+</a>
+<p class="section">Loadbalanced worker</p>
+<p class="section">
+                    <table border="0">
+<tr>
+<td align="middle" valign="top" bgcolor="#039acc">Property name</td>
+<td align="middle" valign="top" bgcolor="#039acc">Default</td>
+<td align="middle" valign="top" bgcolor="#039acc">Description</td>
+</tr>
+<tr>
+<td align="left" valign="top" bgcolor="#a0ddf0">worker</td>
+<td align="left" valign="top" bgcolor="#a0ddf0"/>
+<td align="left" valign="top" bgcolor="#a0ddf0"/>
+</tr>
+<tr>
+<td align="left" valign="top" bgcolor="#a0ddf0">noWorkerMsg</td>
+<td align="left" valign="top" bgcolor="#a0ddf0"/>
+<td align="left" valign="top" bgcolor="#a0ddf0"/>
+</tr>
+<tr>
+<td align="left" valign="top" bgcolor="#a0ddf0">noWorkerCode</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">503</td>
+<td align="left" valign="top" bgcolor="#a0ddf0"/>
+</tr>
+<tr>
+<td align="left" valign="top" bgcolor="#a0ddf0">hwBalanceErr</td>
+<td align="left" valign="top" bgcolor="#a0ddf0"/>
+<td align="left" valign="top" bgcolor="#a0ddf0"/>
+</tr>
+</table>
+                </p>
+<br/>
+<br/>
+<a name="sub_loggers">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top" class="subsection" bgcolor="#828DA6">
+<img border="0" vspace="0" hspace="0" align="left" valign="top" src="../images/corner.gif"/>loggers</td>
+</tr>
+</table>
+</a>
+<p class="section">Any connector based on jk2, at least has a default logger, that can be reached using the "logger" alias, the logger used is the more appropiate for the plataform/server combination, Apache2 under in any platform has logger.apache2 as default, IIS on his only platform uses logger.win32, and Any apache 1 install uses logger.file as default.., the config file lets you change that defaults, you can end using logger.file in IIs i.e</p>
+<p class="section">The properties shared by all loggers are:
+<table border="0">
+<tr>
+<td align="middle" valign="top" bgcolor="#039acc">Property name</td>
+<td align="middle" valign="top" bgcolor="#039acc">Default</td>
+<td align="middle" valign="top" bgcolor="#039acc">Description</td>
+</tr>
+<tr>
+<td align="left" valign="top" bgcolor="#a0ddf0">level</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">INFO</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">Log level. Supported: EMERG, ERROR, INFO, DEBUG</td>
+</tr>
+</table>
+            </p>
+<a name="sub_logger.file">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top" class="subsection" bgcolor="#828DA6">
+<img border="0" vspace="0" hspace="0" align="left" valign="top" src="../images/corner.gif"/>logger.file</td>
+</tr>
+</table>
+</a>
+<p class="section">
+                    <table border="0">
+<tr>
+<td align="middle" valign="top" bgcolor="#039acc">Property name</td>
+<td align="middle" valign="top" bgcolor="#039acc">Default</td>
+<td align="middle" valign="top" bgcolor="#039acc">Description</td>
+</tr>
+<tr>
+<td align="left" valign="top" bgcolor="#a0ddf0">file</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">${serverRoot}/logs/jk2.log</td>
+<td align="left" valign="top" bgcolor="#a0ddf0">
+    Log file.  XXX you may be able to change this at runtime,
+               to implement rolling.
+  </td>
+</tr>
+</table>
+                </p>
+<br/>
+<a name="sub_logger.win32">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top" class="subsection" bgcolor="#828DA6">
+<img border="0" vspace="0" hspace="0" align="left" valign="top" src="../images/corner.gif"/>logger.win32</td>
+</tr>
+</table>
+</a>
+<p class="section">logger used in the IIS server by default, it ends at native Application Event Log.</p>
+<br/>
+<a name="sub_logger.apache2">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top" class="subsection" bgcolor="#828DA6">
+<img border="0" vspace="0" hspace="0" align="left" valign="top" src="../images/corner.gif"/>logger.apache2</td>
+</tr>
+</table>
+</a>
+<p class="section">Logger used in Apache2 servers, it normally in ends in error.log </p>
+<br/>
+<br/>
+<br/>
+<a name="Examples">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top" class="section" bgcolor="#525D76">
+<img border="0" vspace="0" hspace="0" align="left" valign="top" src="../images/corner.gif"/>Examples</td>
+</tr>
+</table>
+</a>
+<p class="section">
+The examples below are working when the Tomcat is configured according the 
+examples described in the configtc file.
+</p>
+<a name="sub_/example using normal socket">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top" class="subsection" bgcolor="#828DA6">
+<img border="0" vspace="0" hspace="0" align="left" valign="top" src="../images/corner.gif"/>/example using normal socket</td>
+</tr>
+</table>
+</a>
+<p class="section"> 
+Map /examples to the Tomcat /examples context using a normal socket. Note the 
+IP instead localhost (The JVM listens on the IPV4 address not no the IPV6).
+</p>
+<p class="section">
+                <pre class="section">
+[shm]
+file=${serverRoot}/logs/shm.file
+size=1048576
+
+# Example socket channel, override port and host.
+[channel.socket:localhost:8019]
+port=8019
+host=127.0.0.1
+
+# define the worker
+[ajp13:localhost:8019]
+channel=channel.socket:localhost:8019
+
+# Uri mapping
+[uri:/examples/*]
+worker=ajp13:localhost:8019
+</pre>
+            </p>
+<br/>
+<a name="sub_/jkstatus">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top" class="subsection" bgcolor="#828DA6">
+<img border="0" vspace="0" hspace="0" align="left" valign="top" src="../images/corner.gif"/>/jkstatus</td>
+</tr>
+</table>
+</a>
+<p class="section">
+Map /jkstatus to the status worker.
+</p>
+<p class="section">
+                <pre class="section">
+[shm]
+file=${serverRoot}/logs/shm.file
+size=1048576
+
+# define the worker
+[status:status]
+
+# Uri mapping
+[uri:/jkstatus/*]
+worker=status:status
+</pre>
+            </p>
+<br/>
+<a name="sub_/example using AF_UNIX socket">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr>
+<td align="left" valign="top" class="subsection" bgcolor="#828DA6">
+<img border="0" vspace="0" hspace="0" align="left" valign="top" src="../images/corner.gif"/>/example using AF_UNIX socket</td>
+</tr>
+</table>
+</a>
+<p class="section">
+Map /examples to the Tomcat /examples context using a AF_UNIX socket.
+Socket file is create by the Tomcat becarefull when the Web Server runs in
+a different user than the Tomcat with the permission of the socket file:
+<pre class="section">
+apache20@jfcexpert:~/apache&gt; ls -l /home1/jakarta/jakarta-tomcat-4.1/dist/work/jk2.socket
+srw-rw----    1 jakarta  jakarta         0 Jun 20 08:27 /home1/jakarta/jakarta-tomcat-4.1/dist/work/jk2.socket
+</pre>
+Here the Tomcat user and the Web Server user must be in the same group.
+</p>
+<p class="section">
+                <pre class="section">
+[shm]
+file=${serverRoot}/logs/shm.file
+size=1048576
+
+# Example unixsocket channel.
+[channel.un:unixsocket]
+file=/home1/jakarta/jakarta-tomcat-4.1/dist/work/jk2.socket
+
+# define the worker
+[ajp13:unixsocket]
+channel=channel.un:unixsocket
+
+# Uri mapping
+[uri:/examples/*]
+worker=ajp13:unixsocket
+</pre>
+            </p>
+<br/>
+<br/>
+</td>
+</tr>
+</table>
+</body>
+</html>
