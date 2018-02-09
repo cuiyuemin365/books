@@ -116,6 +116,7 @@ public interface Wrapper extends Container {
      * Long.MAX_VALUE is considered to mean that unavailability is permanent.
      *
      * @param available The new available date/time
+     * 设置这个servlet从什么时候开始可用
      */
     public void setAvailable(long available);
 
@@ -146,6 +147,7 @@ public interface Wrapper extends Container {
      * load on first call).
      *
      * @param value New load-on-startup value
+     * 是否在启动的时候加载，以及启动时的加载顺序
      */
     public void setLoadOnStartup(int value);
 

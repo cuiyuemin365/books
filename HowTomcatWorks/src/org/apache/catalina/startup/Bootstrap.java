@@ -41,11 +41,11 @@ public final class Bootstrap {
     public static void main(String args[]) {
 
         // Set the debug flag appropriately
-        for (int i = 0; i < args.length; i++)  {
+        for (int i = 0; i < args.length; i++) {
             if ("-debug".equals(args[i]))
                 debug = 1;
         }
-        
+
         // Configure catalina.base from catalina.home if not yet set
         if (System.getProperty("catalina.base") == null)
             System.setProperty("catalina.base", getCatalinaHome());
@@ -62,29 +62,32 @@ public final class Bootstrap {
             ClassLoaderFactory.setDebug(debug);
 
             unpacked[0] = new File(getCatalinaHome(),
-                                   "common" + File.separator + "classes");
+                    "common" + File.separator + "classes");
             packed2[0] = new File(getCatalinaHome(),
-                                  "common" + File.separator + "endorsed");
+                    "common" + File.separator + "endorsed");
             packed2[1] = new File(getCatalinaHome(),
-                                  "common" + File.separator + "lib");
+                    "common" + File.separator + "lib");
+            //通用加载器：common目录下的类文件
             commonLoader =
-                ClassLoaderFactory.createClassLoader(unpacked, packed2, null);
+                    ClassLoaderFactory.createClassLoader(unpacked, packed2, null);
 
             unpacked[0] = new File(getCatalinaHome(),
-                                   "server" + File.separator + "classes");
+                    "server" + File.separator + "classes");
             packed[0] = new File(getCatalinaHome(),
-                                 "server" + File.separator + "lib");
+                    "server" + File.separator + "lib");
+            //catalina加载器：server目录下的类文件
             catalinaLoader =
-                ClassLoaderFactory.createClassLoader(unpacked, packed,
-                                                     commonLoader);
+                    ClassLoaderFactory.createClassLoader(unpacked, packed,
+                            commonLoader);
 
             unpacked[0] = new File(getCatalinaBase(),
-                                   "shared" + File.separator + "classes");
+                    "shared" + File.separator + "classes");
             packed[0] = new File(getCatalinaBase(),
-                                 "shared" + File.separator + "lib");
+                    "shared" + File.separator + "lib");
+            //shared加载器：shared目录下的类文件
             sharedLoader =
-                ClassLoaderFactory.createClassLoader(unpacked, packed,
-                                                     commonLoader);
+                    ClassLoaderFactory.createClassLoader(unpacked, packed,
+                            commonLoader);
         } catch (Throwable t) {
 
             log("Class loader creation threw exception", t);
@@ -95,6 +98,7 @@ public final class Bootstrap {
         Thread.currentThread().setContextClassLoader(catalinaLoader);
 
         // Load our startup class and call its process() method
+        // 加载启动类，并执行process方法
         try {
 
             SecurityClassLoad.securityClassLoad(catalinaLoader);
@@ -103,8 +107,8 @@ public final class Bootstrap {
             if (debug >= 1)
                 log("Loading startup class");
             Class startupClass =
-                catalinaLoader.loadClass
-                ("org.apache.catalina.startup.Catalina");
+                    catalinaLoader.loadClass
+                            ("org.apache.catalina.startup.Catalina");
             Object startupInstance = startupClass.newInstance();
 
             // Set the shared extensions class loader
@@ -116,7 +120,7 @@ public final class Bootstrap {
             Object paramValues[] = new Object[1];
             paramValues[0] = sharedLoader;
             Method method =
-                startupInstance.getClass().getMethod(methodName, paramTypes);
+                    startupInstance.getClass().getMethod(methodName, paramTypes);
             method.invoke(startupInstance, paramValues);
 
             // Call the process() method
@@ -128,7 +132,7 @@ public final class Bootstrap {
             paramValues = new Object[1];
             paramValues[0] = args;
             method =
-                startupInstance.getClass().getMethod(methodName, paramTypes);
+                    startupInstance.getClass().getMethod(methodName, paramTypes);
             method.invoke(startupInstance, paramValues);
 
         } catch (Exception e) {
@@ -145,7 +149,7 @@ public final class Bootstrap {
      */
     private static String getCatalinaHome() {
         return System.getProperty("catalina.home",
-                                  System.getProperty("user.dir"));
+                System.getProperty("user.dir"));
     }
 
 
@@ -173,7 +177,7 @@ public final class Bootstrap {
     /**
      * Log a debugging detail message with an exception.
      *
-     * @param message The message to be logged
+     * @param message   The message to be logged
      * @param exception The exception to be logged
      */
     private static void log(String message, Throwable exception) {
